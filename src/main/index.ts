@@ -1,18 +1,25 @@
+import { app, BrowserWindow, Menu } from "electron";
 import { join } from "path";
-import { app, BrowserWindow, Menu, globalShortcut } from "electron";
+import { optimizer, is } from "@electron-toolkit/utils";
 
 const createWindow = () => {
   const window = new BrowserWindow({
     width: 800,
     height: 600,
     show: false,
+    title: "Cypher",
     webPreferences: {
-      preload: join(__dirname, "../preload/preload.js"),
+      preload: join(__dirname, "../preload/index.js"),
+      sandbox: false,
     },
   });
-  window.loadURL(
-    import.meta.env.DEV ? "http://localhost:5173" : join(__dirname, "../../index.html"),
-  );
+
+  if (is.dev) {
+    window.loadURL("http://localhost:5173");
+  } else {
+    window.loadFile(join(__dirname, "../renderer/index.html"));
+  }
+
   window.on("ready-to-show", () => window.show());
 
   return window;
@@ -25,32 +32,11 @@ const initWindow = () => {
 initWindow();
 
 app.on("ready", () => {
-  const window = createWindow();
-  globalShortcut.register("CmdOrCtrl+F12", () => {
-    window.isFocused() && window.webContents.toggleDevTools();
-  });
+  createWindow();
 });
 
-// function createWindow() {
-//   // Create the browser window.
-//   Menu.setApplicationMenu(null);
-//   const mainWindow = new BrowserWindow({
-//     width: 800,
-//     height: 600,
-//     show: false,
-//     webPreferences: {
-//       preload: join(__dirname, "../preload/preload.js"),
-//     },
-//   });
-
-//   mainWindow.on("ready-to-show", () => mainWindow.show());
-
-//   // and load the index.html of the app.
-//   mainWindow.loadURL(
-//     isDev ? "http://localhost:5173" : join(__dirname, "../../index.html"),
-//   );
-//   // Open the DevTools.
-//   if (isDev) {
-//     mainWindow.webContents.openDevTools();
-//   }
-// }
+if (is.dev) {
+  app.on("browser-window-created", (_, window) => {
+    optimizer.watchWindowShortcuts(window);
+  });
+}
