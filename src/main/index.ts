@@ -4,9 +4,11 @@ import { optimizer, is } from "@electron-toolkit/utils";
 
 const createWindow = () => {
   const window = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 750,
+    height: 500,
     show: false,
+    minWidth: 750,
+    minHeight: 500,
     title: "Cypher",
     webPreferences: {
       preload: join(__dirname, "../preload/index.js"),

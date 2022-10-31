@@ -1,11 +1,9 @@
 import { css, Global, Theme, useTheme } from "@emotion/react";
 import { memo } from "react";
 import type { FC } from "react";
-import poppins from "../../assets/poppins.ttf";
-import fluent from "../../assets/fluent.ttf";
-
 const GlobalStyle: FC = (): JSX.Element => {
   const { background, color, scrollbar }: Theme = useTheme();
+
   return (
     <Global
       styles={css`
@@ -23,19 +21,22 @@ const GlobalStyle: FC = (): JSX.Element => {
           background: ${background};
           color: ${color};
           height: 100vh;
+          width: 100vw;
+          user-select: none;
         }
         #root {
           display: flex;
-          height: 100vh;
-          overflow: hidden;
+          flex: 1;
+          overflow-y: auto;
+          overflow-x: hidden;
         }
         @font-face {
           font-family: "Segoe Fluent Icons";
-          src: url(${fluent}) format("truetype");
+          src: url("/src/assets/fonts/fluent.ttf") format("truetype");
         }
         @font-face {
           font-family: "Poppins";
-          src: url(${poppins}) format("truetype");
+          src: url("/src/assets/fonts/poppins.ttf") format("truetype");
         }
         ::-webkit-scrollbar {
           width: 4px;
