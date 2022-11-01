@@ -15,6 +15,9 @@ const themes: Themes = {
     navigation: "#eaeaea",
     border: "#e5e5e5",
     hamburger: "#f0f0f0",
+    info: "#333",
+    panel: "#f3f3f3",
+    shadow: "#0000000a",
   },
   dark: {
     background: "#252525",
@@ -23,6 +26,9 @@ const themes: Themes = {
     navigation: "#212121",
     border: "#3b3b3b",
     hamburger: "#2a2a2a",
+    info: "#bbb",
+    panel: "#2a2a2a",
+    shadow: "#00000022",
   },
 };
 
