@@ -12,9 +12,7 @@ const Home: FC = (): JSX.Element => {
       <Panel>
         <PanelHeader icon="&#xE789;" header="Hi, welcome to Cypher!" />
         <PanelContent>
-          <PanelText header="Cypher is a simple encryption/decryption app.">
-            <span>Or i hope it does 💀</span>
-          </PanelText>
+          <PanelText header="Cypher is a simple encryption/decryption app."></PanelText>
         </PanelContent>
       </Panel>
       <Panel>
