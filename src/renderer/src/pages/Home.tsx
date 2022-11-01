@@ -1,8 +1,9 @@
+import Page from "@renderer/components/page/Page";
 import type { FC } from "react";
 import { memo } from "react";
 
 const Home: FC = (): JSX.Element => {
-  return <div>WELCOME TO CYPHER</div>;
+  return <Page header="Home"></Page>;
 };
 
 export default memo(Home);

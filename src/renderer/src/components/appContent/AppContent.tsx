@@ -1,10 +1,10 @@
 import type { FC } from "react";
-import { useState, lazy, useMemo, Suspense, useEffect } from "react";
+import { useState, lazy, useMemo, Suspense } from "react";
 import GlobalStyle from "../globalStyle/GlobalStyle";
 import Nav from "../nav/Nav";
 
 const AppContent: FC = (): JSX.Element => {
-  const [page, setPage] = useState("Loading");
+  const [page, setPage] = useState("Home");
 
   const Component = useMemo(() => {
     return lazy(() => {
@@ -12,14 +12,10 @@ const AppContent: FC = (): JSX.Element => {
     });
   }, [page]);
 
-  useEffect(() => {
-    setTimeout(() => setPage("Home"), 1000);
-  }, []);
-
   return (
     <>
       <GlobalStyle />
-      <Nav setPage={setPage} />
+      <Nav page={page} setPage={setPage} />
       <Suspense fallback={<></>}>
         <Component />
       </Suspense>
